@@ -45,14 +45,6 @@
 #include "virtualKeyboard.h"
 #include "system.h"
 
-#ifdef __PSP__
-#include <pspkernel.h>
-
-// PSP_MODULE_INFO("OpenSupaplex", 0, 7, 1); -> SDL_main sets this for us, for now at least
-PSP_MAIN_THREAD_ATTR(THREAD_ATTR_USER | THREAD_ATTR_VFPU);
-PSP_HEAP_SIZE_KB(-1024);
-#endif
-
 // title1DataBuffer -> A000:4DAC - A000:CAAC
 // title2DataBuffer -> 0x4DD4 - 0xCAD4
 

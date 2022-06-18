@@ -1,0 +1,7 @@
+NEW:
+- Add CMake build system
+- Remove other platforms, support: Windows, Linux, macOS(? not tested).
+- Deep clean unused code.
+
+FIXED:
+- (Nearly) fixed audio on Windows.

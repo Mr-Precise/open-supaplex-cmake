@@ -17,21 +17,7 @@
 
 #include "logging.h"
 
-#if HAVE_SDL2
 #include <SDL2/SDL.h>
-#endif
-
-#if (defined(__vita__) || defined(__PSL1GHT__)) && DEBUG
-#define USE_DEBUGNET 1
-#endif
-
-#if USE_DEBUGNET
-#include <debugnet.h>
-#endif
-
-#if defined(__SWITCH__) && DEBUG
-#include <switch.h>
-#endif
 
 LogLevel gLogLevel = LogLevelInfo;
 
@@ -42,25 +28,12 @@ void setLogLevel(LogLevel logLevel)
 
 void initializeLogging(void)
 {
-#if USE_DEBUGNET
-    debugNetInit(DEBUGNETIP, 18194, DEBUG);
-#endif
-
-#if defined(__SWITCH__) && DEBUG
-    socketInitializeDefault(); // Initialize sockets
-    nxlinkStdio(); // Redirect stdout and stderr over the network to nxlink
-#endif
-
     spLogInfo("Logging system initialized.");
 }
 
 void destroyLogging(void)
 {
     spLogInfo("Destroying logging system...");
-
-#if defined(__SWITCH__) && DEBUG
-    socketExit();
-#endif
 
     spLogInfo("Logging system destroyed");
 }
@@ -78,13 +51,7 @@ void spLog(LogLevel level, const char *format, ...)
     va_start(argptr, format);
     vsprintf(buffer, format, argptr);
     va_end(argptr);
-#if USE_DEBUGNET
-    debugNetPrintf(INFO, "%s\n", buffer);
-#endif
 
-#if HAVE_SDL2
     SDL_Log("%s", buffer);
-#else
-    printf("%s\n", buffer);
-#endif
+    // printf("%s\n", buffer);
 }

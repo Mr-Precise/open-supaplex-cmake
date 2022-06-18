@@ -24,19 +24,8 @@
 #include "../logging.h"
 #include "../utils.h"
 
-#if defined(__PSP__)
-static const int kWindowWidth = 480;
-static const int kWindowHeight = 272;
-#elif defined(__vita__)
-static const int kWindowWidth = 960;
-static const int kWindowHeight = 544;
-#elif defined(__PSL1GHT__) || defined(__WIIU__)
-static const int kWindowWidth = 1280;
-static const int kWindowHeight = 720;
-#else
 static const int kWindowWidth = kScreenWidth * 4;
 static const int kWindowHeight = kScreenHeight * 4;
-#endif
 
 SDL_Surface *gScreenSurface = NULL;
 uint8_t *gScreenPixels = NULL;
@@ -64,12 +53,7 @@ void initializeVideo(uint8_t fastMode)
                                SDL_WINDOWPOS_UNDEFINED,
                                kWindowWidth,
                                kWindowHeight,
-#if defined(__SWITCH__) || defined(__vita__) || defined(__PSP__) || defined(__PSL1GHT__) || defined(__WIIU__)
-                               SDL_WINDOW_FULLSCREEN);
-#else
                                0);
-#endif
-
     if (gWindow == NULL)
     {
         spLogInfo("Could not create a window: %s", SDL_GetError());
@@ -102,9 +86,6 @@ void initializeVideo(uint8_t fastMode)
     // HACK: this is needed for my crappy SDL2 implementation (https://github.com/sergiou87/SDL2/commit/962e4e565562c2cd70b877f3d697ad2084d9405b)
     // but this should be fixed on SDL's side (or pspgl's), I think.
     //
-#ifdef __PSP__
-    format = SDL_PIXELFORMAT_ABGR32;
-#endif
 
     gTexture = SDL_CreateTexture(gRenderer,
                                  format,

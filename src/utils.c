@@ -19,11 +19,7 @@
 
 #include <string.h>
 
-#if HAVE_SDL2
 #include <SDL2/SDL.h>
-#elif HAVE_SDL
-#include <SDL/SDL.h>
-#endif
 
 const char b64chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 

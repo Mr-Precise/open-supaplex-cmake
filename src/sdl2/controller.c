@@ -195,20 +195,12 @@ uint8_t getGameControllerButtonRightShoulder(void)
 
 uint8_t getGameControllerConfirmButton(void)
 {
-#if defined(__SWITCH__) || defined(__WIIU__)
-    return getGameControllerButtonB();
-#else
     return getGameControllerButtonA();
-#endif
 }
 
 uint8_t getGameControllerCancelButton(void)
 {
-#if defined(__SWITCH__) || defined(__WIIU__)
-    return getGameControllerButtonA();
-#else
     return getGameControllerButtonB();
-#endif
 }
 
 uint8_t isAnyGameControllerButtonPressed(void)
