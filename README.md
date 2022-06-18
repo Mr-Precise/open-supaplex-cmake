@@ -1,8 +1,9 @@
 # OpenSupaplex
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) ![Run OpenSupaplex Tests](https://github.com/sergiou87/open-supaplex/workflows/Run%20OpenSupaplex%20Tests/badge.svg)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)  
 
 [Supaplex](https://en.wikipedia.org/wiki/Supaplex) is a game made in the early nineties.
+* This is a fork [sergiou87/open-supaplex repo](https://github.com/sergiou87/open-supaplex)
 
 ![image](https://github.com/sergiou87/open-supaplex/raw/master/switch/resources/screenshots/OpenSupaplex-5.png)
 
@@ -20,16 +21,8 @@ the instructions in [cilliemalan's repo](https://github.com/cilliemalan/supaplex
 Other than that, **OpenSupaplex** can be built for any of the following platforms:
 - macOS
 - Windows
-- Linux
-- PSP
-- PS Vita
-- PlayStation 3
-- Nintendo DS
-- Nintendo 3DS
-- Nintendo Wii
-- Nintendo Wii U
-- Nintendo Switch
-- RISC OS
+- Linux  
+- Other from original code: [sergiou87/open-supaplex repo](https://github.com/sergiou87/open-supaplex)
 
 More platforms (like Android, iOS and tvOS) to come Soon™.
 
@@ -39,16 +32,27 @@ You will also need to install the libraries needed to make it work. Those are ba
 and their dependencies. All ports use SDL 2, except for PSP, Nintendo DS, Nintendo 3DS, Nintendo Wii and
 RISC OS, which use SDL 1.2.
 
-All platforms supported are built from CI using [GitHub Actions](https://github.com/sergiou87/open-supaplex/actions). You can check [those workflows](https://github.com/sergiou87/open-supaplex/tree/master/.github/workflows)
-and the CI scripts used in them for more info about how to prepare the dev environment.
 
 ### Building
 Once the development environment is set up, building the game is usually as easy as:
+
+Install CMake for your OS.  
+Install dev packages SDL2, SDL2_Mixer
+ 
+Linux build: 
+``` 
+mkdir build && cd build
+cmake -G "Unix Makefiles" ..
+make
+```  
+MinGW32 or MXE CrossCompiling: 
 ```
-$ make
+mkdir build && cd build
+cmake -G "Unix Makefiles" .. -DCMAKE_TOOLCHAIN_FILE=Your-CrossCompiling-Toolchain-file.cmake
+make
 ```
 
-On macOS, just opening the Xcode project and running it is enough.
+On macOS, not yet tested...
 
 ## Contributing
 
