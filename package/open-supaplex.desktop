@@ -1,0 +1,11 @@
+[Desktop Entry]
+Categories=Game;LogicGame;
+Comment[ru_RU]=Supaplex - двухмерная компьютерная логическая игра в жанре платформера из девяностых.
+Comment=Supaplex - is a 2D platform logic game from the nineties.
+Exec=opensupaplex
+GenericName=Supaplex
+Icon=open-supaplex
+MimeType=
+Name=OpenSupaplex
+Terminal=false
+Type=Application
