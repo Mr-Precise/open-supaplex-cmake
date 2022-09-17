@@ -714,6 +714,7 @@ static const char *kAdvancedConfigFXVolumeKey = "fxVolume";
 static const char *kAdvancedConfigScalingModeKey = "scalingMode";
 static const char *kAdvancedConfigFullscreenKey = "fullscreen";
 static const char *kAdvancedConfigDisplayFPSKey = "displayFPS";
+static const char *kAdvancedConfigLimitFPSKey = "limitFPS";
 
 void readAdvancedConfig()
 {
@@ -767,6 +768,7 @@ void readAdvancedConfig()
     setScalingMode(scalingMode);
 
     gShouldShowFPS = readConfigInt(config, kAdvancedConfigDebugSection, kAdvancedConfigDisplayFPSKey, gShouldShowFPS);
+    gShouldLimitFPS = readConfigInt(config, kAdvancedConfigDebugSection, kAdvancedConfigLimitFPSKey, gShouldLimitFPS);
 
     int fullscreen = readConfigInt(config, kAdvancedConfigGeneralSection, kAdvancedConfigFullscreenKey, getFullscreenMode());
     setFullscreenMode(fullscreen);
@@ -806,6 +808,7 @@ void writeAdvancedConfig()
 
     writeConfigSection(config, kAdvancedConfigDebugSection);
     writeConfigInt(config, kAdvancedConfigDisplayFPSKey, gShouldShowFPS);
+    writeConfigInt(config, kAdvancedConfigLimitFPSKey, gShouldLimitFPS);
 
     destroyConfig(config);
 }
@@ -975,6 +978,11 @@ void buildDisplayFPSOptionTitle(char output[kMaxAdvancedOptionsMenuEntryTitleLen
     buildBooleanOptionTitle(output, "DISPLAY FPS", gShouldShowFPS);
 }
 
+void buildLimitFPSOptionTitle(char output[kMaxAdvancedOptionsMenuEntryTitleLength])
+{
+    buildBooleanOptionTitle(output, "LIMIT FPS", gShouldLimitFPS);
+}
+
 void buildPlayDemoOptionTitle(char output[kMaxAdvancedOptionsMenuEntryTitleLength])
 {
     snprintf(output, kMaxAdvancedOptionsMenuEntryTitleLength, "PLAY DEMO: %d", gAdvancedMenuPlayDemoIndex);
@@ -1116,6 +1124,11 @@ void toggleDisplayFPSOption()
     TOGGLE_BOOL(gShouldShowFPS);
 }
 
+void toggleLimitFPSOption()
+{
+    TOGGLE_BOOL(gShouldLimitFPS);
+}
+
 void handleResumeOptionSelection()
 {
     gShouldCloseAdvancedMenu = 1;
@@ -1217,6 +1230,13 @@ void handleDebugOptionSelection()
         toggleDisplayFPSOption,
         toggleDisplayFPSOption,
         toggleDisplayFPSOption,
+    });
+    addAdvancedOptionsEntry(&menu, (AdvancedOptionsMenuEntry) {
+        "",
+        buildLimitFPSOptionTitle,
+        toggleLimitFPSOption,
+        toggleLimitFPSOption,
+        toggleLimitFPSOption,
     });
     if (gIsInMainMenu == 0)
     {
